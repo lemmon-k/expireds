@@ -1,0 +1,12 @@
+env: standard
+runtime: nodejs22
+service: default
+
+handlers:
+  - url: /.*
+    secure: always
+    script: auto
+
+instance_class: F1
+automatic_scaling:
+  max_instances: 10

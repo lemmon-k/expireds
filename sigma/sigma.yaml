@@ -1,0 +1,5 @@
+runtime: nodejs22
+service: sigma
+instance_class: F4_1G
+automatic_scaling:
+  max_instances: 10
