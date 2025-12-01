@@ -1,6 +1,5 @@
 import "./globals.css";
 import { Providers } from "@/providers";
-import { Navbar, Footer } from "@/components";
 
 const title = process.env.NEXT_PUBLIC_BRAND;
 const description = `${process.env.NEXT_PUBLIC_BRAND} | Real-time expired listings for real estate agents`;
@@ -46,9 +45,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body>
         <Providers>
-          <Navbar />
           <main className="fade-in">{children}</main>
-          <Footer />
         </Providers>
       </body>
     </html>

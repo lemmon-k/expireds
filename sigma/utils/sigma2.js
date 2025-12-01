@@ -16,7 +16,7 @@ const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 // scrape "expired" listings
 export async function sigma2() {
-  console.log('sigma-2 running...')
+  console.log("sigma-2 running...");
   try {
     // read JSON file
     const filePath = path.resolve(BASE_PATH);
@@ -60,7 +60,7 @@ export async function sigma2() {
         listings[i].property_type =
           updatedData.propertyType || listings[i].property_type;
         listings[i].address = updatedData.address || listings[i].address;
-        listings[i].stage = "sanitized"
+        listings[i].stage = "sanitized";
       } else {
         removed++;
         listings.splice(i, 1); // safe removal
@@ -74,17 +74,24 @@ export async function sigma2() {
       return item;
     });
 
-    // overwrite
-    fs.writeFileSync(
-      filePath,
-      JSON.stringify(indexedListings, null, 2),
-      "utf-8"
-    );
-    console.log("SAVED");
-    console.log("-------------------------------");
+    // save listings
+    return save(filePath, indexedListings);
   } catch (error) {
     console.log("Error at scrapeListings():", error);
   }
+}
+
+// TODO write to db
+// save data to db, and local file in dev
+async function save(filePath, listings) {
+  if (process.env.ENV === "prod") {
+    return console.log(listings.length);
+  }
+
+  // overwrite local file
+  fs.writeFileSync(filePath, JSON.stringify(listings, null, 2), "utf-8");
+  console.log("SAVED");
+  console.log("-------------------------------");
 }
 
 // parse page data

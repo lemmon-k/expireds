@@ -34,8 +34,9 @@ export async function sigma1() {
     const results = await getData(epochs, page);
 
     browser.close();
-    return console.log("RESULTS: ", results.length);
-    // return save(results);
+
+    // save listings
+    return save(results);
   } catch (error) {
     console.log("Error at: ", "scrapeListings()", error);
   }
@@ -171,6 +172,11 @@ async function getData(epochs, page, limit = 20) {
 // TODO write to db
 // save listings
 async function save(listings) {
+  if (process.env.ENV === "prod") {
+    return console.log(results.length);
+  }
+
+  // save to local path
   const dir = path.resolve("./tmp");
   if (!fs.existsSync(dir)) fs.mkdirSync(dir);
 

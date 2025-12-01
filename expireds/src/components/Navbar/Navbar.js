@@ -1,13 +1,11 @@
-"use client";
+import { Logo } from "./Logo";
+import { Menu } from "./Menu";
 
-import { Button } from "@heroui/react";
-
-export const Navbar = () => {
+export const Navbar = ({ user }) => {
   return (
     <nav className="navbar">
-      <Button color="primary" onPress={() => alert("Hello World")}>
-        Logo
-      </Button>
+      <Logo />
+      <Menu user={user}/>
     </nav>
   );
 };
